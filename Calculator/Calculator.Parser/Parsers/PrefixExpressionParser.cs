@@ -1,10 +1,5 @@
 ﻿using Calculator.CalculatorLibrary;
 using Calculator.CalculatorLibrary.BinaryOperations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator.Parser.Parsers
 {
@@ -24,35 +19,34 @@ namespace Calculator.Parser.Parsers
         {
             _parseMethods = new Dictionary<Type, ParseMethod>
             {
-                [typeof(Add)] = ParseBinary,
-                [typeof(Subtract)] = ParseBinary,
-                [typeof(Multiply)] = ParseBinary,
-                [typeof(Divide)] = ParseBinary,
-
-
+                [typeof(IBinaryExpression)] = ParseBinary
             };
         }
         public IExpression? Parse(List<string> tokens)
         {
-            int index= 0;
+            int index = 0;
             return Parse(tokens, ref index);
         }
         private IExpression? Parse(List<string> tokens, ref int index)
         {
             if (index > tokens.Count)
                 return null;
+
+
             string token = tokens[index];
             index++;
             var expression = Factory?.GetExpressionByToken(token);
             if (expression is Number)
                 return expression;
             else
-                if (_parseMethods.TryGetValue(key: expression.GetType(), out ParseMethod? parseMethod))
             {
-                return parseMethod(expression, tokens, ref index);
+                var key = _parseMethods.Keys.FirstOrDefault(t => t.IsAssignableFrom(expression.GetType()));
+                if (key != null)
+                    return _parseMethods[key](expression, tokens, ref index);
+                else
+                    throw new ArgumentException($"Unknown expression type: {expression.GetType()}");
             }
 
-            throw new ArgumentException($"Unknown expression type: {expression.GetType()}");
         }
         private IExpression? ParseBinary(IExpression binaryExpression, List<string> tokens, ref int index)
         {
@@ -66,7 +60,5 @@ namespace Calculator.Parser.Parsers
             }
             return null;
         }
-
-       
     }
 }

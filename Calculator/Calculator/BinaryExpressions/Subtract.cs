@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public class Subtract : IBinaryExpression
     {
-        public Subtract(IExpression? left=null, IExpression? right=null)
+        public Subtract(IExpression? left = null, IExpression? right = null)
         {
             Left = left;
             Right = right;
@@ -19,7 +13,7 @@ namespace Calculator.CalculatorLibrary.BinaryOperations
 
         public double? Calculate()
         {
-            return  Left?.Calculate() - Right?.Calculate();
+            return Left?.Calculate() - Right?.Calculate();
         }
     }
 }

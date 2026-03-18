@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public class Divide : IBinaryExpression
     {
-        public Divide(IExpression? left=null, IExpression? right=null)
+        public Divide(IExpression? left = null, IExpression? right = null)
         {
             Left = left;
             Right = right;

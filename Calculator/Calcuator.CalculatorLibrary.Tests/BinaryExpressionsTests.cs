@@ -1,6 +1,5 @@
 using Calculator.CalculatorLibrary;
 using Calculator.CalculatorLibrary.BinaryOperations;
-using Xunit;
 
 namespace CalculatorLibrary.Tests
 {
@@ -77,7 +76,7 @@ namespace CalculatorLibrary.Tests
             Assert.Throws<DivideByZeroException>(() => divide.Calculate());
         }
 
-     
+
         [Fact]
         public void NestedExpression_AddAndMultiply()
         {
@@ -122,8 +121,8 @@ namespace CalculatorLibrary.Tests
                 new Number(3),
                 new Number(3)
             );
-            var expression=new Divide(left, subtract);
-            Assert.Throws<DivideByZeroException>(()=>expression.Calculate());
+            var expression = new Divide(left, subtract);
+            Assert.Throws<DivideByZeroException>(() => expression.Calculate());
 
         }
 

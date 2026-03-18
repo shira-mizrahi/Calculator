@@ -1,5 +1,5 @@
-﻿using Calculator.CalculatorLibrary.BinaryOperations;
-using Calculator.CalculatorLibrary;
+﻿using Calculator.CalculatorLibrary;
+using Calculator.CalculatorLibrary.BinaryOperations;
 
 public class ExpressionsFactory
 {
@@ -30,7 +30,7 @@ public class ExpressionsFactory
 
         if (_expressions.TryGetValue(token, out var expressionFactory))
         {
-            return expressionFactory(); 
+            return expressionFactory();
         }
 
         throw new ArgumentException($"Unknown token: {token}");

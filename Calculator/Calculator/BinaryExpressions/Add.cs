@@ -2,7 +2,7 @@
 {
     public class Add : IBinaryExpression
     {
-        public Add(IExpression? left=null, IExpression? right=null)
+        public Add(IExpression? left = null, IExpression? right = null)
         {
             Left = left;
             Right = right;

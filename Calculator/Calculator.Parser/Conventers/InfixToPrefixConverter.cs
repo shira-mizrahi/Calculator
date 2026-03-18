@@ -3,7 +3,7 @@ using Calculator.CalculatorLibrary;
 
 namespace Calculator.Parser.Conventers
 {
-    public class InfixToPrefixConverter : IInfixConverter
+    public class InfixToPrefixConverter : IConverter
     {
         public Tokenizer Tokenizer;
         private Dictionary<string, Action<string, Stack<string>, List<string>>> _tokenHandlers;
@@ -17,30 +17,17 @@ namespace Calculator.Parser.Conventers
         {
             _tokenHandlers = new Dictionary<string, Action<string, Stack<string>, List<string>>>
             {
-                ["("] = (token, operatorsStack, output) =>
-                {
-                    operatorsStack.Push(token);
-                },
-
-                [")"] = (token, operatorsStack, output) =>
-                    PopOperatorsUntilLeftParen(operatorsStack, output),
-
-                ["+"] = (token, operatorsStack, output) =>
-                    HandleOperator(token, operatorsStack, output),
-
-                ["-"] = (token, operatorsStack, output) =>
-                    HandleOperator(token, operatorsStack, output),
-
-                ["*"] = (token, operatorsStack, output) =>
-                    HandleOperator(token, operatorsStack, output),
-
-                ["/"] = (token, operatorsStack, output) =>
-                    HandleOperator(token, operatorsStack, output)
+                ["("] = (token, operatorsStack, output) => operatorsStack.Push(token),
+                [")"] = (token, operatorsStack, output) => PopOperatorsUntilLeftParen(operatorsStack, output)
             };
+            var operators = new[] { "+", "-", "*", "/" };
+            foreach (var op in operators)
+            {
+                _tokenHandlers[op] = HandleOperator;
+            }
         }
-        public List<string> Convert(string infix)
+        public List<string> Convert(List<string> tokens)
         {
-            List<string> tokens = Tokenizer.Tokenize(infix);
             tokens.Reverse();
             var result = GetPostfixOrder(SwapParentheses(tokens));
             result.Reverse();

@@ -1,6 +1,4 @@
-﻿
-
-namespace Calculator.CalculatorLibrary
+﻿namespace Calculator.CalculatorLibrary
 {
     public static class OperatorHelper
     {

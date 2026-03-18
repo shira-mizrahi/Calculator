@@ -1,36 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Calculator.Parser.Conventers;
-using Calculator.Parser;
-using Calculator.Parser.Parsers;
-
+﻿using Calculator.Bootstrapper;
+using Calculator.ConsoleUI.Readers;
+using Calculator.ConsoleUI.Writers;
 namespace Calculator.ConsoleUI
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
-            var tokenizer = new Tokenizer();
-            var converter = new InfixToPrefixConverter(tokenizer);
-            var parser = new PrefixExpressionParser(new ExpressionsFactory());
-            var tests = new List<string>
-            {
-                "3+4+5",
-                "3+4*5",
-                "(3+4)*5",
-                "10-2-3",
-                "8/(4-2)"
-            };
-
-            foreach (var expression in tests)
-            {
-                var result = converter.Convert(expression);
-                var numericResult = parser.Parse(result);
-                System.Console.WriteLine($"Infix: {expression}");
-                System.Console.WriteLine($"Lisp : {string.Join(" ", result)}");
-                System.Console.WriteLine($"result : {numericResult?.Calculate()}");
-                System.Console.WriteLine();
-            }
+            var bootstrapper = new MyBootstrapper();
+            var expressionProcessor = bootstrapper.ProvideDependencies();
+            var reader = new ConsoleReader();
+            var writer = new ConsoleWriter();
+            var runner = new Runner(expressionProcessor, reader, writer);
+            runner.Run();
         }
     }
 }
