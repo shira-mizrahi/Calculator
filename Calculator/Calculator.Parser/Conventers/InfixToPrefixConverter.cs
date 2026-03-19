@@ -20,8 +20,7 @@ namespace Calculator.Parser.Conventers
                 ["("] = (token, operatorsStack, output) => operatorsStack.Push(token),
                 [")"] = (token, operatorsStack, output) => PopOperatorsUntilLeftParen(operatorsStack, output)
             };
-            var operators = new[] { "+", "-", "*", "/" };
-            foreach (var op in operators)
+            foreach (var op in OperatorHelper.AllOperators)
             {
                 _tokenHandlers[op] = HandleOperator;
             }
