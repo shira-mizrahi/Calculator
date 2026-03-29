@@ -18,3 +18,4 @@ namespace Calculator.ConsoleUI
 }
 
 // CR: Clean Code: all files should be formatted before commiting
+// CR: Conventions: branch names should start with feature/...
