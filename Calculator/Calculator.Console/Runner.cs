@@ -3,9 +3,11 @@ using Calculator.ConsoleUI.Writers;
 using Calculator.Parser;
 
 namespace Calculator.ConsoleUI
+// CR: Clean Code: in dotnet 6 and up, namespaces should be on class level (without {})
 {
     public class Runner
     {
+        // CR: Conventions: use primary constructors
         public Runner(ExpressionProcessor? expressionProcessor, IReader reader, IWriter writer)
         {
             ExpressionProcessor = expressionProcessor;
@@ -13,6 +15,8 @@ namespace Calculator.ConsoleUI
             Writer = writer;
         }
 
+        // CR: Conventions: properties should come before the constructors
+        // CR: Clean Code: fields that are not used outside a class should be declared as private
         public ExpressionProcessor? ExpressionProcessor { get; set; }
         public IReader Reader { get; set; }
         public IWriter Writer { get; set; }

@@ -1,7 +1,9 @@
-﻿namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿//CR: Clean Code: wrong namespace
+namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public class Subtract : IBinaryExpression
     {
+        //CR: Clean Code: use primary constructor
         public Subtract(IExpression? left = null, IExpression? right = null)
         {
             Left = left;

@@ -1,6 +1,7 @@
 using Calculator.CalculatorLibrary;
 using Calculator.CalculatorLibrary.BinaryOperations;
 
+//CR: Conventions : wrong namespace
 namespace CalculatorLibrary.Tests
 {
     public class BinaryOperationsTests

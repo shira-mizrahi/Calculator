@@ -1,4 +1,5 @@
-﻿namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿//CR: Clean Code: wrong namespace
+namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public class Divide : IBinaryExpression
     {
@@ -13,6 +14,7 @@
 
         public double? Calculate()
         {
+            //CR: Clean Code: use var
             double? rightResult = Right?.Calculate();
             if (rightResult == 0)
                 throw new DivideByZeroException();

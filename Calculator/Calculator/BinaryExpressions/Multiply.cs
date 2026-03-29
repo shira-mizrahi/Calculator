@@ -1,7 +1,9 @@
-﻿namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿//CR: Clean Code: wrong namespace
+namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public class Multiply : IBinaryExpression
     {
+        //CR: Clean Code: use primary constructor
         public Multiply(IExpression? left = null, IExpression? right = null)
         {
             Left = left;

@@ -5,6 +5,7 @@ namespace Calculator.Parser.Parsers
 {
     public class PrefixExpressionParser : IParser
     {
+        // CR: Clean Code: fields that are not used outside a class should be declared as private
         public delegate IExpression? ParseMethod(IExpression expression, List<string> tokens, ref int index);
         public ExpressionsFactory? Factory { get; set; }
         private Dictionary<Type, ParseMethod> _parseMethods;
@@ -15,6 +16,7 @@ namespace Calculator.Parser.Parsers
             InitializeParseMethods();
         }
 
+        // CR: Clean Code: redundant method, should initialize in constructor
         private void InitializeParseMethods()
         {
             _parseMethods = new Dictionary<Type, ParseMethod>
@@ -24,6 +26,7 @@ namespace Calculator.Parser.Parsers
         }
         public IExpression? Parse(List<string> tokens)
         {
+            //CR: Clean Code: use var
             int index = 0;
             return Parse(tokens, ref index);
         }
@@ -31,17 +34,19 @@ namespace Calculator.Parser.Parsers
         {
             if (index > tokens.Count)
                 return null;
-
-
+            
+            //CR: Clean Code: use var
             string token = tokens[index];
             index++;
             var expression = Factory?.GetExpressionByToken(token);
             if (expression is Number)
                 return expression;
+            //CR: Clean Code: redundant else
             else
             {
                 var key = _parseMethods.Keys.FirstOrDefault(t => t.IsAssignableFrom(expression.GetType()));
                 if (key != null)
+                    //CR: Functionality: check if expression is null
                     return _parseMethods[key](expression, tokens, ref index);
                 else
                     throw new ArgumentException($"Unknown expression type: {expression.GetType()}");

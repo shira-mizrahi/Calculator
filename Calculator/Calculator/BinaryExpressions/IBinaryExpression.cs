@@ -1,4 +1,5 @@
-﻿namespace Calculator.CalculatorLibrary.BinaryOperations
+﻿//CR: Clean Code: wrong namespace
+namespace Calculator.CalculatorLibrary.BinaryOperations
 {
     public interface IBinaryExpression : IExpression
     {

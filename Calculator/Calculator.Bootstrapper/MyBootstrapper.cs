@@ -11,6 +11,7 @@ namespace Calculator.Bootstrapper
             var tokenizer = new Tokenizer();
             var converter = new InfixToPrefixConverter(tokenizer);
             var parser = new PrefixExpressionParser(new ExpressionsFactory());
+            //CR: Clean code: use var and .net 8 convention for list
             List<IValidator> validators = new List<IValidator>()
             {
                 new ParenthesesBalanced(),

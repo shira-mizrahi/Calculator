@@ -1,4 +1,5 @@
-﻿namespace Calculator.Parser.Conventers
+﻿//CR: Typo: "converters"
+namespace Calculator.Parser.Conventers
 {
     public interface IConverter
     {

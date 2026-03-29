@@ -16,3 +16,5 @@ namespace Calculator.ConsoleUI
         }
     }
 }
+
+// CR: Clean Code: all files should be formatted before commiting

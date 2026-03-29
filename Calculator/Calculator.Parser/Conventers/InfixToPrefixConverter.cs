@@ -5,12 +5,14 @@ namespace Calculator.Parser.Conventers
 {
     public class InfixToPrefixConverter : IConverter
     {
+        //CR: Clean Code: unused variable
         public Tokenizer Tokenizer;
         private Dictionary<string, Action<string, Stack<string>, List<string>>> _tokenHandlers;
 
         public InfixToPrefixConverter(Tokenizer tokenizer)
         {
             Tokenizer = tokenizer;
+            // CR: Clean Code: redundant method. should put this in the constructor
             InitializeTokenHandlers();
         }
         private void InitializeTokenHandlers()

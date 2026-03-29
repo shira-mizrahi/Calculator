@@ -6,8 +6,10 @@ namespace Calculator.Parser
         public List<string> Tokenize(string input)
         {
             var tokens = new List<string>();
+            // CR: SOLID - OCP: what if i want more tokens with more complex logic?
             var pattern = @"(\d+(\.\d+)?)|[+\-*/()]|\s+";
             var matches = Regex.Matches(input, pattern);
+            // CR: Clean Code: use var
             int currentIndex = 0;
             foreach (Match match in matches)
             {

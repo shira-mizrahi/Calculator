@@ -3,6 +3,7 @@ using Calculator.CalculatorLibrary;
 
 namespace Calculator.Parser.Validators
 {
+    // CR: Clean Code: usually we won't place 2 types in a single file
     public enum InfixValidatorStates
     {
         ExpectedOperand,
@@ -12,6 +13,7 @@ namespace Calculator.Parser.Validators
     public class InfixValidator : IValidator
     {
         private delegate bool TokenHandler(string token, ref InfixValidatorStates state);
+        // CR: Clean Code: no reason to not be readonly
         private Dictionary<string, TokenHandler> _handlers;
 
         public InfixValidator()
@@ -19,8 +21,10 @@ namespace Calculator.Parser.Validators
             InitializeHandlers();
         }
 
+        // CR: Clean Code: redundant method. should put this in the constructor
         private void InitializeHandlers()
         {
+            // CR: SOLID - DIP: should not have configuration outside of bootstrap
             _handlers = new Dictionary<string, TokenHandler>
             {
                 ["("] = HandleOpenParen,
