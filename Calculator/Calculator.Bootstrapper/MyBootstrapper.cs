@@ -59,7 +59,8 @@ public class MyBootstrapper
             ["+"] = () => new Add(),
             ["-"] = () => new Subtract(),
             ["*"] = () => new Multiply(),
-            ["/"] = () => new Divide()
+            ["/"] = () => new Divide(),
+            ["^"] = () => new Power()
         };
         return new ExpressionsFactory(expressions);
     }
