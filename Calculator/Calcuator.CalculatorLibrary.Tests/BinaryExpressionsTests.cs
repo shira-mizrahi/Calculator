@@ -1,7 +1,8 @@
-using Calculator.CalculatorLibrary;
-using Calculator.CalculatorLibrary.BinaryOperations;
 
-namespace CalculatorLibrary.Tests
+using Calculator.CalculatorLibrary.Abstraction;
+using Calculator.CalculatorLibrary.BinaryExpressions;
+
+namespace Calculator.CalculatorLibrary.Tests
 {
     public class BinaryOperationsTests
     {

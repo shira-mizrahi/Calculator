@@ -1,25 +1,10 @@
-﻿using Calculator.CalculatorLibrary;
-using Calculator.CalculatorLibrary.BinaryOperations;
+﻿
+using Calculator.CalculatorLibrary.Abstraction;
 
-public class ExpressionsFactory
+namespace Calculator.CalculatorLibrary;
+public class ExpressionsFactory(Dictionary<string, Func<IExpression>> expressions)
 {
-    private Dictionary<string, Func<IExpression>> _expressions;
-
-    public ExpressionsFactory()
-    {
-        InitializeExpressions();
-    }
-
-    private void InitializeExpressions()
-    {
-        _expressions = new Dictionary<string, Func<IExpression>>()
-        {
-            ["+"] = () => new Add(),
-            ["-"] = () => new Subtract(),
-            ["*"] = () => new Multiply(),
-            ["/"] = () => new Divide()
-        };
-    }
+    private Dictionary<string, Func<IExpression>> _expressions = expressions;
 
     public IExpression GetExpressionByToken(string token)
     {

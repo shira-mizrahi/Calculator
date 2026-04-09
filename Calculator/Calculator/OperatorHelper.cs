@@ -1,24 +1,22 @@
-﻿namespace Calculator.CalculatorLibrary
+﻿namespace Calculator.CalculatorLibrary;
+public class OperatorHelper
 {
-    public static class OperatorHelper
+    private readonly Dictionary<string, int> _precedence;
+
+    public OperatorHelper(Dictionary<string, int> precedence)
     {
-        public static readonly Dictionary<string, int> Precedence = new()
-        {
-            ["+"] = 1,
-            ["-"] = 1,
-            ["*"] = 2,
-            ["/"] = 2
-        };
-
-        public static readonly List<string> AllOperators = new(Precedence.Keys);
-        public static int GetPrecedence(string op)
-        {
-            if (Precedence.TryGetValue(op, out var precedence))
-                return precedence;
-
-            throw new ArgumentException($"Unknown operator: {op}");
-        }
-
-        public static bool IsOperator(string op) => AllOperators.Contains(op);
+        _precedence = precedence;
     }
+
+    public int GetPrecedence(string op)
+    {
+        if (_precedence.TryGetValue(op, out var precedence))
+            return precedence;
+
+        throw new ArgumentException($"Unknown operator: {op}");
+    }
+
+    public bool IsOperator(string op) => _precedence.ContainsKey(op);
+
+    public IReadOnlyList<string> AllOperators => [.. _precedence.Keys];
 }

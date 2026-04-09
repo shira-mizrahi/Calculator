@@ -1,7 +1,7 @@
-﻿namespace Calculator.ConsoleUI.Readers
+﻿using Calculator.ConsoleUI.Abstraction;
+
+namespace Calculator.ConsoleUI.Readers;
+public class ConsoleReader : IReader
 {
-    public class ConsoleReader : IReader
-    {
-        public string? Read() => Console.ReadLine();
-    }
+    public string? Read() => Console.ReadLine();
 }

@@ -1,10 +1,10 @@
-﻿namespace Calculator.ConsoleUI.Writers
+﻿using Calculator.ConsoleUI.Abstraction;
+
+namespace Calculator.ConsoleUI.Writers;
+public class ConsoleWriter : IWriter
 {
-    public class ConsoleWriter : IWriter
+    public void Write(string text)
     {
-        public void Write(string text)
-        {
-            Console.WriteLine(text); ;
-        }
+        Console.WriteLine(text); ;
     }
 }

@@ -1,50 +1,41 @@
-﻿using Calculator.ConsoleUI.Readers;
-using Calculator.ConsoleUI.Writers;
+﻿using Calculator.ConsoleUI.Abstraction;
 using Calculator.Parser;
 
-namespace Calculator.ConsoleUI
+namespace Calculator.ConsoleUI;
+
+public class Runner(ExpressionProcessor? expressionProcessor, IReader reader, IWriter writer)
 {
-    public class Runner
+    private ExpressionProcessor? _expressionProcessor { get; set; } = expressionProcessor;
+    private IReader _reader { get; set; } = reader;
+    private IWriter _writer { get; set; } = writer;
+
+    public void Run()
     {
-        public Runner(ExpressionProcessor? expressionProcessor, IReader reader, IWriter writer)
+        _writer.Write("Enter an expression to calculate:");
+        _writer.Write("Type 'exit' to quit.");
+        while (true)
         {
-            ExpressionProcessor = expressionProcessor;
-            Reader = reader;
-            Writer = writer;
-        }
-
-        public ExpressionProcessor? ExpressionProcessor { get; set; }
-        public IReader Reader { get; set; }
-        public IWriter Writer { get; set; }
-
-        public void Run()
-        {
-            Writer.Write("Enter an expression to calculate:");
-            Writer.Write("Type 'exit' to quit.");
-            while (true)
+            _writer.Write("> ");
+            var input = _reader.Read();
+            if (string.Equals(input, "exit"))
+                break;
+            if (string.IsNullOrWhiteSpace(input))
+                continue;
+            try
             {
-                Writer.Write("> ");
-                var input = Reader.Read();
-                if (string.Equals(input, "exit"))
-                    break;
-                if (string.IsNullOrWhiteSpace(input))
-                    continue;
-                try
-                {
-                    var expression = ExpressionProcessor?.GetExpression(input);
+                var expression = _expressionProcessor?.GetExpression(input);
 
-                    if (expression == null)
-                    {
-                        Writer.Write("Invalid expression.");
-                        continue;
-                    }
-                    var result = expression.Calculate();
-                    Writer.Write($"{input} = {result}");
-                }
-                catch (Exception ex)
+                if (expression == null)
                 {
-                    Writer.Write($"Error: {ex.Message}");
+                    _writer.Write("Invalid expression.");
+                    continue;
                 }
+                var result = expression.Calculate();
+                _writer.Write($"{input} = {result}");
+            }
+            catch (Exception ex)
+            {
+                _writer.Write($"Error: {ex.Message}");
             }
         }
     }

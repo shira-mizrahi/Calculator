@@ -1,12 +1,12 @@
-﻿namespace Calculator.CalculatorLibrary
-{
-    public class Number(double? value = null) : IExpression
-    {
-        public double? Value { get; set; } = value;
+﻿using Calculator.CalculatorLibrary.Abstraction;
 
-        public double? Calculate()
-        {
-            return Value;
-        }
+namespace Calculator.CalculatorLibrary;
+public class Number(double? value = null) : IExpression
+{
+    private double? _value { get; set; } = value;
+
+    public double? Calculate()
+    {
+        return _value;
     }
 }
