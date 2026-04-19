@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Calculator.Common\Calculator.Common.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Calculator.Bootstrapper\Calculator.Bootstrapper.csproj" />
+		<ProjectReference Include="..\Calculator.Common\Calculator.Common.csproj" />
 		<ProjectReference Include="..\Calculator.Parser\Calculator.Parser.csproj" />
 	</ItemGroup>
 

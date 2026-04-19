@@ -14,6 +14,11 @@ public class Power : IBinaryExpression
 
     public double? Calculate()
     {
-        return Math.Pow(Left?.Calculate() ?? 0, Right?.Calculate() ?? 0);
+        if (Left?.Calculate() is double l && Right?.Calculate() is double r)
+        {
+            return Math.Pow(l, r);
+        }
+
+        throw new InvalidOperationException("Invalid operands for power");
     }
 }

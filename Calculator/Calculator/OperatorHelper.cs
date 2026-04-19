@@ -1,11 +1,16 @@
-﻿namespace Calculator.CalculatorLibrary;
+﻿using Calculator.Common;
+
+namespace Calculator.CalculatorLibrary;
 public class OperatorHelper
 {
     private readonly Dictionary<string, int> _precedence;
+    private readonly Dictionary<string, bool> _isRightAssociative;
 
-    public OperatorHelper(Dictionary<string, int> precedence)
+
+    public OperatorHelper(OperatorConfig operatorConfig)
     {
-        _precedence = precedence;
+        _precedence = operatorConfig.Precedence;
+        _isRightAssociative = operatorConfig.IsRightAssociative;
     }
 
     public int GetPrecedence(string op)
@@ -15,6 +20,8 @@ public class OperatorHelper
 
         throw new ArgumentException($"Unknown operator: {op}");
     }
+    public bool IsRightAssociative(string op)
+       => _isRightAssociative.TryGetValue(op, out var result) && result;
 
     public bool IsOperator(string op) => _precedence.ContainsKey(op);
 

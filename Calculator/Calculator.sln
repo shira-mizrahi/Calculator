@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Parser", "Calcul
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.ConsoleUI", "Calculator.Console\Calculator.ConsoleUI.csproj", "{DCB519C3-9E97-4880-88D2-B49928DB73AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Bootstrapper", "Calculator.Bootstrapper\Calculator.Bootstrapper.csproj", "{C46045BF-6B9A-4064-B787-D54C038B282B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Bootstrapper", "Calculator.Bootstrapper\Calculator.Bootstrapper.csproj", "{C46045BF-6B9A-4064-B787-D54C038B282B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Common", "Calculator.Common\Calculator.Common.csproj", "{1EB1B6FE-2110-4B52-B6CE-B8A870D2C004}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C46045BF-6B9A-4064-B787-D54C038B282B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C46045BF-6B9A-4064-B787-D54C038B282B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C46045BF-6B9A-4064-B787-D54C038B282B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB1B6FE-2110-4B52-B6CE-B8A870D2C004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB1B6FE-2110-4B52-B6CE-B8A870D2C004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB1B6FE-2110-4B52-B6CE-B8A870D2C004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB1B6FE-2110-4B52-B6CE-B8A870D2C004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

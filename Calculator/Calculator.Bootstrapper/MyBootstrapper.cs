@@ -8,18 +8,19 @@ using Calculator.CalculatorLibrary;
 using static Calculator.Parser.Validators.InfixValidator;
 using Calculator.CalculatorLibrary.BinaryExpressions;
 using Calculator.CalculatorLibrary.Abstraction;
+using Calculator.Common;
 namespace Calculator.Bootstrapper;
 public class MyBootstrapper
 {
-    private readonly Dictionary<string, int> _precedence;
+    private readonly OperatorConfig _config;
 
-    public MyBootstrapper(Dictionary<string, int> config)
+    public MyBootstrapper(OperatorConfig config)
     {
-        _precedence = config;
+        _config = config;
     }
     public ExpressionProcessor ProvideDependencies()
     {
-        var operatorHelper = new OperatorHelper(_precedence);
+        var operatorHelper = new OperatorHelper(_config);
         var tokenizer = new BasicTokenizer();
         var converter = new InfixToPrefixConverter(tokenizer, operatorHelper);
         var parser = new PrefixExpressionParser(CreateExpressionsFactory());
@@ -38,7 +39,7 @@ public class MyBootstrapper
         infixValidatorHandlers["("] = infixValidator.HandleOpenParen;
         infixValidatorHandlers[")"] = infixValidator.HandleCloseParen;
 
-        foreach (var op in _precedence.Keys)
+        foreach (var op in _config.Precedence.Keys)
         {
             infixValidatorHandlers[op] = infixValidator.HandleOperator;
         }

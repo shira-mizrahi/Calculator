@@ -1,4 +1,5 @@
 ﻿using Calculator.Bootstrapper;
+using Calculator.Common;
 using Calculator.ConsoleUI.Readers;
 using Calculator.ConsoleUI.Writers;
 using System.Text.Json;
@@ -12,7 +13,7 @@ class Program
         var json = File.ReadAllText(path);
         var config = JsonSerializer.Deserialize<OperatorConfig>(json)
                      ?? throw new Exception("Invalid config");
-        var bootstrapper = new MyBootstrapper(config.Precedence);
+        var bootstrapper = new MyBootstrapper(config);
         var expressionProcessor = bootstrapper.ProvideDependencies();
         var reader = new ConsoleReader();
         var writer = new ConsoleWriter();

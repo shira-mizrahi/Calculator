@@ -27,11 +27,10 @@ public class PrefixExpressionParser : IParser
     {
         if (index > tokens.Count)
             return null;
-
-
         var token = tokens[index];
         index++;
-        var expression = _factory?.GetExpressionByToken(token);
+        var expression = _factory?.GetExpressionByToken(token)
+            ?? throw new ArgumentException($"Unknown token: {token}");
         if (expression is Number)
             return expression;
         var key = _parseMethods.Keys.FirstOrDefault(t => t.IsAssignableFrom(expression?.GetType()));

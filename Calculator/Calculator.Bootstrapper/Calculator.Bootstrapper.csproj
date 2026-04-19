@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Calculator.Common\Calculator.Common.csproj" />
     <ProjectReference Include="..\Calculator.Parser\Calculator.Parser.csproj" />
     <ProjectReference Include="..\Calculator\Calculator.CalculatorLibrary.csproj" />
   </ItemGroup>

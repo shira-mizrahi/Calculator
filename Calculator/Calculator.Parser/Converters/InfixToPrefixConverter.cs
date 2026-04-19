@@ -59,10 +59,17 @@ public class InfixToPrefixConverter : IConverter
     private void HandleOperator(string op, Stack<string> operatorsStack, List<string> result)
     {
         while (operatorsStack.Count > 0 && operatorsStack.Peek() != "(" &&
-              _operatorHelper.GetPrecedence(operatorsStack.Peek()) > _operatorHelper.GetPrecedence(op))
+               (
+                   _operatorHelper.GetPrecedence(operatorsStack.Peek()) > _operatorHelper.GetPrecedence(op) ||
+                   (
+                       _operatorHelper.GetPrecedence(operatorsStack.Peek()) == _operatorHelper.GetPrecedence(op) &&
+                       _operatorHelper.IsRightAssociative(op)
+                   )
+               ))
         {
             result.Add(operatorsStack.Pop());
         }
+
         operatorsStack.Push(op);
     }
     private void PopOperatorsUntilLeftParen(Stack<string> operatorsStack, List<string> result)
