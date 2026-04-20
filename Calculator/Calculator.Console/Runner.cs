@@ -23,6 +23,7 @@ public class Runner(ExpressionProcessor? expressionProcessor, IReader reader, IW
                 continue;
             try
             {
+              
                 var expression = _expressionProcessor?.GetExpression(input);
 
                 if (expression == null)

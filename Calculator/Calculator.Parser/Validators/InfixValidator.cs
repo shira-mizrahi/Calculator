@@ -20,7 +20,19 @@ public class InfixValidator(Dictionary<string, InfixValidator.TokenHandler> hand
         state = InfixValidatorStates.ExpectedOperand;
         return true;
     }
-
+    public bool HandleUnaryPostfix(string token, ref InfixValidatorStates state)
+    {
+        if (state != InfixValidatorStates.ExpectedOperator)
+            return false;
+        return true;
+    }
+    public bool HandleUnaryPrefix(string token, ref InfixValidatorStates state)
+    {
+        if (state != InfixValidatorStates.ExpectedOperand)
+            return false;
+        state = InfixValidatorStates.ExpectedOperand;
+        return true;
+    }
     public bool HandleOpenParen(string token, ref InfixValidatorStates state)
     {
         if (state != InfixValidatorStates.ExpectedOperand) return false;

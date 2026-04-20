@@ -6,12 +6,12 @@ namespace Calculator.Parser;
 
 public class ExpressionProcessor
 {
-    private BasicTokenizer _tokenizer;
+    private ITokenizer _tokenizer;
     private List<IValidator> _validators;
     private IConverter _infixConverter;
     private IParser _parser;
 
-    public ExpressionProcessor(BasicTokenizer tokenizer, List<IValidator> validators, IConverter infixConverter, IParser parser)
+    public ExpressionProcessor(ITokenizer tokenizer, List<IValidator> validators, IConverter infixConverter, IParser parser)
     {
         _tokenizer = tokenizer;
         _validators = validators;

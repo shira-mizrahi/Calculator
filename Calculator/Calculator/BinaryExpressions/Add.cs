@@ -2,16 +2,10 @@
 
 namespace Calculator.CalculatorLibrary.BinaryExpressions;
 
-public class Add : IBinaryExpression
+public class Add(IExpression? left = null, IExpression? right = null) : IBinaryExpression
 {
-    public Add(IExpression? left = null, IExpression? right = null)
-    {
-        Left = left;
-        Right = right;
-    }
-
-    public IExpression? Left { get; set; }
-    public IExpression? Right { get; set; }
+    public IExpression? Left { get; set; } = left;
+    public IExpression? Right { get; set; } = right;
 
     public double? Calculate()
     {

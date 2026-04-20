@@ -1,16 +1,10 @@
 ﻿using Calculator.CalculatorLibrary.Abstraction;
 
 namespace Calculator.CalculatorLibrary.BinaryExpressions;
-public class Power : IBinaryExpression
+public class Power(IExpression? left = null, IExpression? right = null) : IBinaryExpression
 {
-    public Power(IExpression? left = null, IExpression? right = null)
-    {
-        Left = left;
-        Right = right;
-    }
-
-    public IExpression? Left { get; set; }
-    public IExpression? Right { get; set; }
+    public IExpression? Left { get; set; } = left;
+    public IExpression? Right { get; set; } = right;
 
     public double? Calculate()
     {

@@ -7,6 +7,7 @@ using Calculator.Parser.Tokenizers;
 using Calculator.CalculatorLibrary;
 using static Calculator.Parser.Validators.InfixValidator;
 using Calculator.CalculatorLibrary.BinaryExpressions;
+using Calculator.CalculatorLibrary.UnaryExpressions;
 using Calculator.CalculatorLibrary.Abstraction;
 using Calculator.Common;
 namespace Calculator.Bootstrapper;
@@ -20,8 +21,10 @@ public class MyBootstrapper
     }
     public ExpressionProcessor ProvideDependencies()
     {
-        var operatorHelper = new OperatorHelper(_config);
-        var tokenizer = new BasicTokenizer();
+        //var operatorHelper = new OperatorHelper(_config.Operators);
+        var operatorHelper = new OperatorHelper(_config.BinaryOperators,_config.UnaryOperators);
+
+        var tokenizer = new SupportUnaryTokenizer();
         var converter = new InfixToPrefixConverter(tokenizer, operatorHelper);
         var parser = new PrefixExpressionParser(CreateExpressionsFactory());
         var validators = new List<IValidator>
@@ -39,9 +42,16 @@ public class MyBootstrapper
         infixValidatorHandlers["("] = infixValidator.HandleOpenParen;
         infixValidatorHandlers[")"] = infixValidator.HandleCloseParen;
 
-        foreach (var op in _config.Precedence.Keys)
+        foreach (var op in _config.BinaryOperators.Keys)
         {
             infixValidatorHandlers[op] = infixValidator.HandleOperator;
+        }
+        foreach (var op in _config.UnaryOperators.Keys)
+        {
+            if (_config.UnaryOperators[op].Position=="prefix")
+                infixValidatorHandlers[op] = infixValidator.HandleUnaryPrefix;
+            else
+                infixValidatorHandlers[op] = infixValidator.HandleUnaryPostfix;
         }
         return infixValidator;
     }
@@ -61,7 +71,9 @@ public class MyBootstrapper
             ["-"] = () => new Subtract(),
             ["*"] = () => new Multiply(),
             ["/"] = () => new Divide(),
-            ["^"] = () => new Power()
+            ["^"] = () => new Power(),
+            ["√"] = () => new SquareRoot(),
+            ["!"] = () => new Factorial()
         };
         return new ExpressionsFactory(expressions);
     }

@@ -9,7 +9,7 @@ public class InfixToPrefixConverter : IConverter
     private Dictionary<string, Action<string, Stack<string>, List<string>>> _tokenHandlers;
     private OperatorHelper _operatorHelper;
 
-    public InfixToPrefixConverter(BasicTokenizer tokenizer, OperatorHelper operatorHelper)
+    public InfixToPrefixConverter(ITokenizer tokenizer, OperatorHelper operatorHelper)
     {
         _tokenHandlers = new Dictionary<string, Action<string, Stack<string>, List<string>>>
         {

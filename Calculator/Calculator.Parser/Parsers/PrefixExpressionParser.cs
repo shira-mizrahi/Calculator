@@ -1,6 +1,7 @@
 ﻿using Calculator.CalculatorLibrary;
 using Calculator.CalculatorLibrary.Abstraction;
 using Calculator.Parser.Abstract;
+using System.Linq.Expressions;
 
 namespace Calculator.Parser.Parsers;
 
@@ -15,7 +16,8 @@ public class PrefixExpressionParser : IParser
         _factory = expressionsFactory;
         _parseMethods = new Dictionary<Type, ParseMethod>
         {
-            [typeof(IBinaryExpression)] = ParseBinary
+            [typeof(IBinaryExpression)] = ParseBinary,
+            [typeof(IUnaryExpression)] = ParseUnary
         };
     }
     public IExpression? Parse(List<string> tokens)
@@ -51,4 +53,15 @@ public class PrefixExpressionParser : IParser
         }
         return null;
     }
+    private IExpression? ParseUnary(IExpression unaryExpression, List<string> tokens, ref int index)
+    {
+        var expression =Parse(tokens, ref index);
+        if(expression != null)
+        {
+            ((IUnaryExpression)unaryExpression).Expression = expression;
+            return unaryExpression;
+        }
+        return null;
+    }
+
 }

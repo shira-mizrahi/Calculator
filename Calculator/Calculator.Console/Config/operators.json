@@ -1,17 +1,35 @@
 {
-  "Precedence": {
-    "+": 1,
-    "-": 1,
-    "*": 2,
-    "/": 2,
-    "^": 3
-
+  "BinaryOperators": {
+    "+": {
+      "precedence": 1,
+      "rightAssociative": false
+    },
+    "-": {
+      "precedence": 1,
+      "rightAssociative": false
+    },
+    "*": {
+      "precedence": 2,
+      "rightAssociative": false
+    },
+    "/": {
+      "precedence": 2,
+      "rightAssociative": false
+    },
+    "^": {
+      "precedence": 3,
+      "rightAssociative": true
+    }
   },
-  "IsRightAssociative": {
-    "+": false,
-    "-": false,
-    "*": false,
-    "/": false,
-    "^": true
+
+  "UnaryOperators": {
+    "!": {
+      "precedence": 4,
+      "position": "postfix"
+    },
+    "√": {
+      "precedence": 3,
+      "position": "prefix"
+    }
   }
 }

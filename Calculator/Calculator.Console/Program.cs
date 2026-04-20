@@ -9,6 +9,8 @@ class Program
 {
     public static void Main()
     {
+        Console.InputEncoding = System.Text.Encoding.UTF8;
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         var path = Path.Combine(AppContext.BaseDirectory, "Config", "operators.json");
         var json = File.ReadAllText(path);
         var config = JsonSerializer.Deserialize<OperatorConfig>(json)

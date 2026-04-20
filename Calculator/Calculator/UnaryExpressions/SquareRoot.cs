@@ -1,19 +1,19 @@
 ﻿using Calculator.CalculatorLibrary.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Calculator.CalculatorLibrary.UnaryExpressions
+namespace Calculator.CalculatorLibrary.UnaryExpressions;
+
+public class SquareRoot(IExpression? expression = null) : IUnaryExpression
 {
-    public class SquareRoot : IUnaryExpression
-    {
-        public IExpression? expression { get; set ; }
+    public IExpression? Expression { get; set; } = expression;
 
-        public double? Calculate()
-        {
-            return Math.Sqrt(expression?.Calculate() ?? 0);
-        }
+    public double? Calculate()
+    {
+        var value = Expression?.Calculate()
+      ?? throw new InvalidOperationException("Missing operand");
+
+        if (value < 0)
+            throw new InvalidOperationException("Square root of negative number is not defined");
+
+        return Math.Sqrt(value);
     }
 }
