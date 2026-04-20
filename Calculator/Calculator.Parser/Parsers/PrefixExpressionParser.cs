@@ -1,7 +1,6 @@
 ﻿using Calculator.CalculatorLibrary;
 using Calculator.CalculatorLibrary.Abstraction;
 using Calculator.Parser.Abstract;
-using System.Linq.Expressions;
 
 namespace Calculator.Parser.Parsers;
 

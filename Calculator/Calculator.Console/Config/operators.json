@@ -25,11 +25,11 @@
   "UnaryOperators": {
     "!": {
       "precedence": 4,
-      "position": "postfix"
+      "position": "Postfix"
     },
     "√": {
       "precedence": 3,
-      "position": "prefix"
+      "position": "Prefix"
     }
   }
 }

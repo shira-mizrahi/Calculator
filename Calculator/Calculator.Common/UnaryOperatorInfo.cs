@@ -7,6 +7,6 @@ namespace Calculator.Common
         [JsonPropertyName("precedence")]
         public int Precedence { get; set; }
         [JsonPropertyName("position")]
-        public string Position { get; set; } = "";
+        public UnaryPosition Position { get; set; }
     }
 }

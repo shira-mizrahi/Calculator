@@ -13,17 +13,15 @@ using Calculator.Common;
 namespace Calculator.Bootstrapper;
 public class MyBootstrapper
 {
-    private readonly OperatorConfig _config;
+    private readonly OperatorConfig _operatorConfig;
 
     public MyBootstrapper(OperatorConfig config)
     {
-        _config = config;
+        _operatorConfig = config;
     }
     public ExpressionProcessor ProvideDependencies()
     {
-        //var operatorHelper = new OperatorHelper(_config.Operators);
-        var operatorHelper = new OperatorHelper(_config.BinaryOperators,_config.UnaryOperators);
-
+        var operatorHelper = new OperatorHelper(_operatorConfig);
         var tokenizer = new SupportUnaryTokenizer();
         var converter = new InfixToPrefixConverter(tokenizer, operatorHelper);
         var parser = new PrefixExpressionParser(CreateExpressionsFactory());
@@ -41,14 +39,13 @@ public class MyBootstrapper
         var infixValidator = new InfixValidator(infixValidatorHandlers);
         infixValidatorHandlers["("] = infixValidator.HandleOpenParen;
         infixValidatorHandlers[")"] = infixValidator.HandleCloseParen;
-
-        foreach (var op in _config.BinaryOperators.Keys)
+        foreach (var op in _operatorConfig.BinaryOperators.Keys)
         {
             infixValidatorHandlers[op] = infixValidator.HandleOperator;
         }
-        foreach (var op in _config.UnaryOperators.Keys)
+        foreach (var op in _operatorConfig.UnaryOperators.Keys)
         {
-            if (_config.UnaryOperators[op].Position=="prefix")
+            if (_operatorConfig.UnaryOperators[op].Position == UnaryPosition.Prefix)
                 infixValidatorHandlers[op] = infixValidator.HandleUnaryPrefix;
             else
                 infixValidatorHandlers[op] = infixValidator.HandleUnaryPostfix;
